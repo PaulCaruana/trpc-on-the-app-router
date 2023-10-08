@@ -26,6 +26,7 @@ export default function TodoList({
   });
 
   const [content, setContent] = useState("");
+  console.log("here2")
 
   return (
     <div>
