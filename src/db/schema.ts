@@ -1,5 +1,5 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import {InferColumnsDataTypes, InferInsertModel, InferModel, InferSelectModel} from "drizzle-orm";
+import {integer, sqliteTable, text} from "drizzle-orm/sqlite-core";
+import {InferInsertModel} from "drizzle-orm";
 
 export const todos = sqliteTable("todos", {
   id: integer("id").primaryKey(),
@@ -10,4 +10,8 @@ export const todos = sqliteTable("todos", {
 export type TodosSchema = typeof todos;
 export type Todo = InferInsertModel<typeof todos>
 
-//const a: Post = {id: 1, content: "p"}
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey(),
+  name: text("name"),
+  email: text("email"),
+});

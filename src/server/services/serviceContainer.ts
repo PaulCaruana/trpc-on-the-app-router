@@ -1,7 +1,8 @@
 import * as injection from "awilix";
+import {asClass, asValue} from "awilix";
 import {BetterSQLite3Database} from "drizzle-orm/better-sqlite3";
 import {sqliteDrizzle} from "@/server/data/dbManager/sqliteDrizzle";
-import {todos, TodosSchema} from "@/db/schema";
+import {todos} from "@/db/schema";
 import {TodoService} from "@/server/services/todo/TodoService";
 import {TodoServiceDrizzle} from "@/server/services/todo/TodoServiceDrizzle";
 import {InferSelectModel} from "drizzle-orm";
@@ -19,8 +20,8 @@ const serviceContainer = injection.createContainer<ServiceContainerCradle>({
 });
 
 serviceContainer.register({
-  sqliteDrizzle: injection.asValue(sqliteDrizzle),
-  todoService: injection.asClass(TodoServiceDrizzle).singleton(),
+  sqliteDrizzle: asValue(sqliteDrizzle),
+  todoService: asClass(TodoServiceDrizzle).singleton(),
 });
 
 export { serviceContainer };
