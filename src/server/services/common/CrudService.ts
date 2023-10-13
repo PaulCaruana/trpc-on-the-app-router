@@ -1,5 +1,5 @@
-export interface CrudService<T> {
-  fetchAll(): Promise<T[]>;
-  fetchById(id: number): Promise<T | undefined>;
-  createEntity(entity: Omit<T, "id">): Promise<boolean>
+export interface CrudService<Entity> {
+  fetchAll(): Promise<Entity[]>;
+  fetchById(id: number): Promise<Entity | undefined>
+  createEntity(entity: Omit<Entity, "id">): Promise<boolean>
 }

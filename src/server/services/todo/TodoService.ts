@@ -1,4 +1,5 @@
 import {CrudService} from "@/server/services/common/CrudService";
 
-export interface TodoService<T> extends CrudService<T> {
+export interface TodoService<Entity> extends CrudService<Entity> {
+  fetchAll(): Promise<Entity[]>;
 }

@@ -1,4 +1,4 @@
-import {eq, sql} from "drizzle-orm";
+import {eq} from "drizzle-orm";
 import {sqliteDrizzle as db} from "@/server/data/dbManager/sqliteDrizzle";
 import {z} from "zod";
 
@@ -6,7 +6,6 @@ import {publicProcedure, router} from "./trpc";
 
 import {todoSchema} from "@/db/schema";
 import {serviceContainer} from "@/server/services/serviceContainer";
-import {logAppDirError} from "next/dist/server/dev/log-app-dir-error";
 
 const todoService = serviceContainer.cradle.todoService;
 export const appRouter = router({
@@ -30,6 +29,7 @@ export const appRouter = router({
       })
     )
     .mutation(async (opts) => {
+       const where= eq(todoSchema.id, opts.input.id)
        await db
         .update(todoSchema)
         .set({ done: opts.input.done })
