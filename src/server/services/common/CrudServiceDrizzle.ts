@@ -6,12 +6,17 @@ import {SQLiteTableWithColumns} from "drizzle-orm/sqlite-core";
 
 //type Dependencies = Pick<ServiceContainerCradle, "sqliteDrizzle">;
 
-export class CrudServiceDrizzle<E extends SQLiteTableWithColumns<any>> implements CrudService {
+export class CrudServiceDrizzle<E extends SQLiteTableWithColumns<any>>  {
   private readonly db = sqliteDrizzle;
   private readonly entities: E
 
    constructor(entities: E ) {
     this.entities = entities
+  }
+
+  async fetchAll() {
+    const values=  await this.db.select().from(this.entities).all();
+    return values
   }
 
   async fetchById(id: number) {

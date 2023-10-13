@@ -1,7 +1,7 @@
 import {ServiceContainerCradle} from "@/server/services/serviceContainer";
 import {TodoService} from "@/server/services/todo/TodoService";
-import {todos} from "@/db/schema";
-import {InferSelectModel} from "drizzle-orm";
+import {todos, TodosSchema} from "@/db/schema";
+import {eq, InferSelectModel} from "drizzle-orm";
 import {CrudServiceDrizzle} from "@/server/services/common/CrudServiceDrizzle";
 
 type Dependencies = Pick<ServiceContainerCradle, "sqliteDrizzle">;
@@ -18,4 +18,4 @@ export class TodoServiceDrizzle extends CrudServiceDrizzle<TodosEntity> implemen
   constructor(dependencies: Dependencies) {
     super(todos)
   }
-}
+ }

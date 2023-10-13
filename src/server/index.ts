@@ -11,7 +11,7 @@ import {logAppDirError} from "next/dist/server/dev/log-app-dir-error";
 const todoService = serviceContainer.cradle.todoService;
 export const appRouter = router({
   getTodos: publicProcedure.query(async () => {
-    return await db.select().from(todos).all();
+    return await todoService.fetchAll()
   }),
   getTodo: publicProcedure.input(z.number()).query(async ({ input }) => {
     const id = input;

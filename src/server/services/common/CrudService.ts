@@ -1,3 +1,4 @@
-export interface CrudService {
-  fetchById(id: number): Promise<any | undefined>;
+export interface CrudService<T> {
+  fetchAll(): Promise<T[]>;
+  fetchById(id: number): Promise<T | undefined>;
 }
