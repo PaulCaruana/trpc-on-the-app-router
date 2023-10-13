@@ -4,7 +4,7 @@ import {z} from "zod";
 
 import {publicProcedure, router} from "./trpc";
 
-import {todos} from "@/db/schema";
+import {todoSchema} from "@/db/schema";
 import {serviceContainer} from "@/server/services/serviceContainer";
 import {logAppDirError} from "next/dist/server/dev/log-app-dir-error";
 
@@ -31,9 +31,9 @@ export const appRouter = router({
     )
     .mutation(async (opts) => {
        await db
-        .update(todos)
+        .update(todoSchema)
         .set({ done: opts.input.done })
-        .where(eq(todos.id, opts.input.id))
+        .where(eq(todoSchema.id, opts.input.id))
         .run();
       return true;
     }),

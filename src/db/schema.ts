@@ -1,14 +1,16 @@
 import {integer, sqliteTable, text} from "drizzle-orm/sqlite-core";
 import {InferInsertModel} from "drizzle-orm";
 
-export const todos = sqliteTable("todos", {
+export const todoSchema = sqliteTable("todos", {
   id: integer("id").primaryKey(),
   content: text("content"),
   done: integer("done"),
 });
 
-export type TodosSchema = typeof todos;
-export type Todo = InferInsertModel<typeof todos>
+export type TodoSchema = typeof todoSchema;
+export type TodoEntity = typeof todoSchema;
+
+export type Todo = InferInsertModel<typeof todoSchema>
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey(),
