@@ -29,13 +29,9 @@ export const appRouter = router({
       })
     )
     .mutation(async (opts) => {
-       const where= eq(todoSchema.id, opts.input.id)
-       await db
-        .update(todoSchema)
-        .set({ done: opts.input.done })
-        .where(eq(todoSchema.id, opts.input.id))
-        .run();
-      return true;
+      const id = opts.input.id;
+      const payload = { done: opts.input.done };
+      return await todoService.updateEntityById(id, payload)
     }),
 });
 

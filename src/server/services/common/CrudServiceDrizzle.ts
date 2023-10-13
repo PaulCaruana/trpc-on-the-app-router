@@ -1,6 +1,7 @@
 import {eq} from "drizzle-orm";
 import {sqliteDrizzle as db, sqliteDrizzle} from "@/server/data/dbManager/sqliteDrizzle";
 import {SQLiteTableWithColumns} from "drizzle-orm/sqlite-core";
+import {todoSchema} from "@/db/schema";
 
 //type Dependencies = Pick<ServiceContainerCradle, "sqliteDrizzle">;
 
@@ -21,6 +22,15 @@ export class CrudServiceDrizzle<Schema extends SQLiteTableWithColumns<any>, Enti
   }
   async createEntity(entity: Omit<Entity, "id">) {
     await db.insert(this.schema).values(entity).run();
+    return true;
+  }
+  async updateEntityById(id:number, payload: Partial<Entity>) {
+    await db
+      .update(this.schema)
+      .set(payload)
+      .where(eq(this.schema.id, id))
+      .run();
+
     return true;
   }
 
