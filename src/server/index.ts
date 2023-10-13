@@ -19,7 +19,7 @@ export const appRouter = router({
     return value
   }),
   addTodo: publicProcedure.input(z.string()).mutation(async (opts) => {
-    await db.insert(todos).values({ content: opts.input, done: 0 }).run();
+    await todoService.createEntity({ content: opts.input, done: 0 })
     return true;
   }),
   setDone: publicProcedure
