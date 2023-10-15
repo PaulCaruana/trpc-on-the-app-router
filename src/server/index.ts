@@ -1,10 +1,6 @@
-import {eq} from "drizzle-orm";
-import {sqliteDrizzle as db} from "@/server/data/dbManager/sqliteDrizzle";
 import {z} from "zod";
 
 import {publicProcedure, router} from "./trpc";
-
-import {todoSchema} from "@/db/schema";
 import {serviceContainer} from "@/server/services/serviceContainer";
 
 const todoService = serviceContainer.cradle.todoService;
