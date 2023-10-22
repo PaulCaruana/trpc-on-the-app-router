@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   console.log("here")
-  const todos = await serverClient.todo.getTodos();
-  const todo = await serverClient.todo.getTodo(1);
+  const todos = await serverClient.todo.fetchAll();
+  const todo = await serverClient.todo.fetchById(1);
   return (
     <main className="max-w-3xl mx-auto mt-5">
       <div>{todo?.content}</div>

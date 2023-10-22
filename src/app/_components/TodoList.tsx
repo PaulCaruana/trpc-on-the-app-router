@@ -7,21 +7,21 @@ import { serverClient } from "../_trpc/serverClient";
 export default function TodoList({
   initialTodos,
 }: {
-  initialTodos: Awaited<ReturnType<(typeof serverClient)["todo"]["getTodos"]>>;
+  initialTodos: Awaited<ReturnType<(typeof serverClient)["todo"]["fetchAll"]>>;
 }) {
-  const getTodos = trpc.todo.getTodos.useQuery(undefined, {
+  const fetchAll = trpc.todo.fetchAll.useQuery(undefined, {
     initialData: initialTodos,
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
-  const addTodo = trpc.todo.addTodo.useMutation({
+  const create = trpc.todo.create.useMutation({
     onSettled: () => {
-      getTodos.refetch();
+      fetchAll.refetch();
     },
   });
-  const setDone = trpc.todo.setDone.useMutation({
+  const markAsDone = trpc.todo.markAsDone.useMutation({
     onSettled: () => {
-      getTodos.refetch();
+      fetchAll.refetch();
     },
   });
 
@@ -31,7 +31,7 @@ export default function TodoList({
   return (
     <div>
       <div className="text-black my-5 text-3xl">
-        {getTodos?.data?.map((todo) => (
+        {fetchAll?.data?.map((todo) => (
           <div key={todo.id} className="flex gap-3 items-center">
             <input
               id={`check-${todo.id}`}
@@ -39,7 +39,7 @@ export default function TodoList({
               checked={!!todo.done}
               style={{ zoom: 1.5 }}
               onChange={async () => {
-                setDone.mutate({
+                markAsDone.mutate({
                   id: todo.id || 0,
                   done: todo.done ? 0 : 1,
                 });
@@ -60,7 +60,7 @@ export default function TodoList({
         <button
           onClick={async () => {
             if (content.length) {
-              addTodo.mutate(content);
+              create.mutate(content);
               setContent("");
             }
           }}

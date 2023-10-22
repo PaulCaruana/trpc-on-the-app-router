@@ -5,15 +5,15 @@ import {serviceContainer} from "@/server/services/serviceContainer";
 
 const todoService = serviceContainer.cradle.todoService;
 export const todoRouter = createTRPCRouter({
-  getTodos: publicProcedure.query(async () => {
+  fetchAll: publicProcedure.query(async () => {
     return await todoService.fetchAll()
   }),
-  getTodo: publicProcedure.input(z.number()).query(async ({ input }) => {
+  fetchById: publicProcedure.input(z.number()).query(async ({ input }) => {
     const id = input;
     const value = await todoService.fetchById(id)
     return value
   }),
-  addTodo: publicProcedure.input(z.string()).mutation(async (opts) => {
+  create: publicProcedure.input(z.string()).mutation(async (opts) => {
     await todoService.createEntity({ content: opts.input, done: 0 })
     return true;
   }),
