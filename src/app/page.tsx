@@ -6,7 +6,6 @@ import {Parent} from "@/app/_components/jotai/Parent";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  console.log("here")
   const todos = await serverClient.todo.fetchAll();
   const todo = await serverClient.todo.fetchById(1);
   return (

@@ -17,7 +17,7 @@ export const todoRouter = createTRPCRouter({
     await todoService.createEntity({ content: opts.input, done: 0 })
     return true;
   }),
-  setDone: publicProcedure
+  markAsDone: publicProcedure
     .input(
       z.object({
         id: z.number(),
