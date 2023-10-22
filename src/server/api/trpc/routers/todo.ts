@@ -4,7 +4,7 @@ import {publicProcedure, createTRPCRouter} from "@/server/api/trpc";
 import {serviceContainer} from "@/server/services/serviceContainer";
 
 const todoService = serviceContainer.cradle.todoService;
-export const appRouter = createTRPCRouter({
+export const todoRouter = createTRPCRouter({
   getTodos: publicProcedure.query(async () => {
     return await todoService.fetchAll()
   }),
@@ -31,4 +31,4 @@ export const appRouter = createTRPCRouter({
     }),
 });
 
-export type AppRouter = typeof appRouter;
+
