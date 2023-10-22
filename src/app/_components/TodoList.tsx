@@ -40,7 +40,7 @@ export default function TodoList({
               style={{ zoom: 1.5 }}
               onChange={async () => {
                 setDone.mutate({
-                  id: todo.id,
+                  id: todo.id || 0,
                   done: todo.done ? 0 : 1,
                 });
               }}
